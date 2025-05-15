@@ -5,73 +5,38 @@
     'label' => null,
 ])
 
-<li
-    x-data="{ label: @js($label) }"
-    data-group-label="{{ $label }}"
-    class="fi-sidebar-group flex flex-col gap-y-1"
->
+<li x-data="{ open: true }" class="mb-4">
     @if ($label)
         <div
             @if ($collapsible)
-                x-on:click="$store.sidebar.toggleCollapsedGroup(label)"
+                @click="open = !open"
+            class="cursor-pointer"
             @endif
-            @if (filament()->isSidebarCollapsibleOnDesktop())
-                x-show="$store.sidebar.isOpen"
-                x-transition:enter="delay-100 lg:transition"
-                x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100"
-            @endif
-            @class([
-                'flex items-center gap-x-3 px-2 py-2',
-                'cursor-pointer' => $collapsible,
-            ])
+            class="flex items-center gap-x-3 px-2 py-2 text-white font-semibold"
         >
             @if ($icon)
-                <x-filament::icon
-                    :icon="$icon"
-                    class="fi-sidebar-group-icon h-6 w-6 text-gray-400 dark:text-gray-500"
-                />
+                <div class="category-img">
+                    <x-filament::icon :icon="$icon" class="h-5 w-5" />
+                </div>
             @endif
-
-            <span
-                class="fi-sidebar-group-label flex-1 text-sm font-semibold text-gray-700 dark:text-gray-200"
-            >
-                {{ $label }}
-            </span>
+            <span>{{ $label }}</span>
 
             @if ($collapsible)
-                <x-filament::icon-button
-                    color="gray"
-                    icon="heroicon-m-chevron-up"
-                    icon-alias="panels::sidebar.group.collapse-button"
-                    x-on:click.stop="$store.sidebar.toggleCollapsedGroup(label)"
-                    x-bind:class="{ 'rotate-180': $store.sidebar.groupIsCollapsed(label) }"
-                    class="fi-sidebar-group-collapse-button -my-2 -me-2"
-                />
+                <svg :class="{ 'rotate-180': open }" class="ml-auto h-4 w-4 transition-transform text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
             @endif
         </div>
     @endif
 
-    <ul
-        x-show="! ($store.sidebar.groupIsCollapsed(label) && ($store.sidebar.isOpen || @js(! filament()->isSidebarCollapsibleOnDesktop())))"
-        @if (filament()->isSidebarCollapsibleOnDesktop())
-            x-transition:enter="delay-100 lg:transition"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-        @endif
-        x-collapse.duration.200ms
-        class="fi-sidebar-group-items flex flex-col gap-y-1"
-    >
+    <ul x-show="open" x-collapse.duration.200ms class="ml-4 mt-2 flex flex-col gap-y-1">
         @foreach ($items as $item)
             <x-filament-page-with-sidebar::item
                 :active-icon="$item->getActiveIcon()"
                 :active="$item->isActive()"
                 :badge-color="$item->getBadgeColor()"
                 :badge="$item->getBadge()"
-                :first="$loop->first"
-                :grouped="filled($label)"
                 :icon="$item->getIcon()"
-                :last="$loop->last"
                 :url="$item->getUrl()"
                 :should-open-url-in-new-tab="$item->shouldOpenUrlInNewTab()"
             >

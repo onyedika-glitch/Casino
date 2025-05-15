@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="pt-BR" class="dark">
-    
+<html lang="pt-BR" class="light">
+
 <!-- Mirrored from revesbet.com/ by HTTrack Website Copier/3.x [XR&CO'2017], Wed, 15 May 2024 16:01:33 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
@@ -9,12 +9,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
                             <link rel="icon" type="image/png" sizes="32x32" href="storage/uploads/ks3j6ssGNyE4XENiTJVDVTLJ2VCzRaXrsaBR4VaK.jpg">
-        
+
         <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-        <link href="../external.html?link=https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&amp;family=Roboto+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&amp;display=swap" rel="stylesheet">  <title>Space PIX - Jogos Online</title>
+        <link href="../external.html?link=https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&amp;family=Roboto+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&amp;display=swap" rel="stylesheet">  <title>99wiwi</title>
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="Oqtm9bZ61ZSYzDy9oc9oHeDRFybLHh5WzSP8Prr0">
+
 
                 <style>
             body{
@@ -62,11 +63,11 @@
                 --input-primary-dark: #B8860B;
 
                 --carousel-banners: #FFD700;
-                --carousel-banners-dark: #DAA520;
+                --carousel-banners-light: #DAA520;
 
 
                 --sidebar-color: #191A1E !important;
-                --sidebar-color-dark: #191A1E !important;
+                --sidebar-color-light: #191A1E !important;
 
 
                 --navtop-color: #24262B;
@@ -123,7 +124,7 @@
     border-radius: 100px;
 }
             </style>
-        
+
         <link rel="preload" as="style" href="build/assets/app-dc48356c.css" /><link rel="modulepreload" href="build/assets/app-4ed993c7.js" /><link rel="modulepreload" href="build/assets/app-c7a390ba.js" /><link rel="stylesheet" href="build/assets/app-dc48356c.css" data-navigate-track="reload" /><script type="module" src="build/assets/app-4ed993c7.js" data-navigate-track="reload"></script><script type="module" src="build/assets/app-c7a390ba.js" data-navigate-track="reload"></script>    </head>
     <body color-theme="dark" class="bg-base text-gray-800 dark:text-gray-300 ">
         <div id="viperpro"></div>
@@ -147,7 +148,7 @@
             }
         </script>
 
-        
+
     </body>
 
 </html>
