@@ -7,12 +7,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libonig-dev \
     libxml2-dev \
-    zip \
-    unzip \
-    curl \
-    git \
-    nginx \
-    supervisor
+    zip unzip curl git nginx supervisor
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
@@ -26,13 +21,15 @@ WORKDIR /var/www/html
 # Copy existing application
 COPY . .
 
-# Copy entrypoint script
-COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Set up NGINX config
+COPY nginx/default.conf /etc/nginx/sites-available/default
 
-# Expose port 80
+# Laravel permissions
+RUN chown -R www-data:www-data /var/www/html \
+ && chmod -R 755 /var/www/html/storage
+
+# Expose port
 EXPOSE 80
 
-ENTRYPOINT ["entrypoint.sh"]
-
-
+# Start services
+CMD service php8.1-fpm start && service nginx start && tail -f /dev/null
