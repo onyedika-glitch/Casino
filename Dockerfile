@@ -2,35 +2,31 @@ FROM php:8.1-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    build-essential \
+    nginx \
+    supervisor \
     libpng-dev \
     libjpeg-dev \
     libonig-dev \
     libxml2-dev \
-    zip unzip curl git nginx supervisor
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    zip unzip curl git \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+# Create working directory
 WORKDIR /var/www/html
 
-# Copy existing application
+# Copy app code
 COPY . .
 
-# Set up NGINX config
-COPY nginx/default.conf /etc/nginx/sites-available/default
+# Copy entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Laravel permissions
-RUN chown -R www-data:www-data /var/www/html \
- && chmod -R 755 /var/www/html/storage
+# Copy supervisord config
+COPY ./conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Expose port
 EXPOSE 80
-
-# Start services
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
