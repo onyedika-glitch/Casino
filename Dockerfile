@@ -32,4 +32,5 @@ RUN chown -R www-data:www-data /var/www/html \
 EXPOSE 80
 
 # Start services
-CMD service php8.1-fpm start && service nginx start && tail -f /dev/null
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
