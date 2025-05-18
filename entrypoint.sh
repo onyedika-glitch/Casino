@@ -1,11 +1,18 @@
 #!/bin/bash
 
-# Start PHP-FPM and NGINX via supervisor
-composer install --no-dev --optimize-autoloader
+# Run Composer if vendor/ is missing
+if [ ! -d "vendor" ]; then
+  composer install --no-dev --optimize-autoloader
+fi
 
+# Laravel config and cache
 php artisan config:cache
 php artisan route:cache
+php artisan migrate --force
 
-# Start PHP-FPM and NGINX
+# Start services
 service php8.1-fpm start
-nginx -g "daemon off;"
+service nginx start
+
+# Keep container running
+tail -f /dev/null
